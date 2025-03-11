@@ -13,6 +13,6 @@ export default {
 
 	plugins: [typography, forms, containerQueries, daisyui],
 	daisyui: {
-		themes: ['corporate', "business"]
+		themes: ['light', "business"]
 	}
 } satisfies Config;

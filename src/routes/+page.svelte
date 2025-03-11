@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { appsList } from '$lib/store/store';
+	import { appsList, theme } from '$lib/store/store';
 	import { Canvas } from '@threlte/core';
 	import Scene from './Scene.svelte';
 </script>
@@ -9,16 +9,16 @@
 		{#each $appsList as app}
 			<a class="app" title={app.name} href={app.route}>
 				<div
-					class="flex h-14 w-16 items-center justify-center bg-gray-400 hover:bg-gray-500"
+					class="flex h-14 w-16 items-center justify-center bg-base-300 hover:bg-gray-300"
 					id="app"
 				>
-					{@html app.svg}
+					{@html $theme == 'light' ? app.svg : app.svg.replaceAll('#000000', '#ffffff')}
 				</div>
 			</a>
 		{/each}
 	</div>
 	<div class="3D-scene flex flex-col">
-		<div class="threeD-modal w-auto">
+		<div class="threeD-modal">
 			<Canvas>
 				<Scene />
 			</Canvas>
@@ -40,6 +40,7 @@
 		height: calc(100vh - 48px);
 	}
 	.threeD-modal {
+		width: calc(100vw - 80px);
 		height: calc(100vh - 80px);
 	}
 </style>

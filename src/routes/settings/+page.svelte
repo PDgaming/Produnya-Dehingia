@@ -12,8 +12,8 @@
 		on:change={() => {
 			if (localStorage.getItem('Theme')) {
 				if (localStorage.getItem('Theme') == 'business') {
-					localStorage.setItem('Theme', 'corporate');
-					theme.set('corporate');
+					localStorage.setItem('Theme', 'light');
+					theme.set('light');
 				} else {
 					localStorage.setItem('Theme', 'business');
 					theme.set('business');
