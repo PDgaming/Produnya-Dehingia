@@ -11,5 +11,8 @@ export default {
 		extend: {}
 	},
 
-	plugins: [typography, forms, containerQueries, daisyui]
+	plugins: [typography, forms, containerQueries, daisyui],
+	daisyui: {
+		themes: ['corporate', "business"]
+	}
 } satisfies Config;
