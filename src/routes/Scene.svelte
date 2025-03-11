@@ -11,7 +11,7 @@
 	});
 </script>
 
-<Threlte.T.DirectionalLight position={[0, 10, 10]} castShadow />
+<Threlte.T.DirectionalLight position={[0, 10, 10]} castShadow intensity={2} />
 
 <Threlte.T.PerspectiveCamera
 	makeDefault
@@ -28,6 +28,7 @@
 	position.y={1.1}
 	args={[0.5, 0.5, 0.5]}
 	rotation={[0, rotation, 0]}
+	castShadow
 />
 
 <Threlte.T.Mesh rotation.x={-Math.PI / 2} receiveShadow position.y={1} rotation.z={rotation}>
