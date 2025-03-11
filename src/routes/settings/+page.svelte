@@ -2,7 +2,7 @@
 	import { theme } from '$lib/store/store';
 </script>
 
-<label class="flex cursor-pointer gap-2">
+<label class="flex cursor-pointer gap-2 p-2">
 	<span class="label-text">Corporate</span>
 	<input
 		type="checkbox"

@@ -41,7 +41,7 @@
 	{#if $locked}
 		<LockScreen />
 	{:else}
-		<div class="window h-full w-full overflow-hidden bg-blue-200">
+		<div class="window h-full w-full overflow-hidden bg-base-100">
 			{#if $isAppRoute}
 				<TitleBar />
 			{/if}
