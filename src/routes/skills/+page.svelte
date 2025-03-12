@@ -22,49 +22,68 @@
 
 <div class="skills flex flex-col gap-3 p-4">
 	<h1 class="text-3xl">My Skills:</h1>
-	<div class="programming-languages">
-		<div class="card bg-base-200 shadow-sm">
-			<div class="card-body">
-				<h2 class="card-title">Programming Languages:</h2>
+	<div class="skils grid grid-cols-3 gap-4">
+		<div class="programming-languages">
+			<div class="card bg-base-200 shadow-sm">
+				<div class="card-body">
+					<h2 class="card-title">Programming Languages:</h2>
 
-				<div class="languges flex gap-2">
-					{#each skills.languages as language}
-						<div class="badge badge-outline">{language}</div>
-					{/each}
+					<div class="languges flex flex-wrap gap-2">
+						{#each skills.languages as language}
+							<div class="badge badge-outline">{language}</div>
+						{/each}
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-	<div class="frameworks">
-		<div class="card bg-base-200 shadow-sm">
-			<div class="card-body">
-				<h2 class="card-title">Frameworks I have worked with:</h2>
-				<div class="frameworks flex gap-2">
-					{#each skills.frameworks as framework}
-						<div class="badge badge-outline">{framework}</div>
-					{/each}
+		<div class="frameworks">
+			<div class="card bg-base-200 shadow-sm">
+				<div class="card-body">
+					<h2 class="card-title">Frameworks I have worked with:</h2>
+					<div class="frameworks flex flex-wrap gap-2">
+						{#each skills.frameworks as framework}
+							<div class="badge badge-outline">{framework}</div>
+						{/each}
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-	<div class="tools-and-technologies">
-		<div class="card bg-base-200 shadow-sm">
-			<div class="card-body">
-				<h2 class="card-title">Tools and Libraries I am familiar with:</h2>
-				<div class="tools-and-technologies flex flex-col gap-2">
-					<div class="front-end-tools flex gap-2">
-						{#each skills.toolsAndLibraries.frontEnd as frontEndTools}
-							<div class="badge badge-outline">{frontEndTools}</div>
-						{/each}
-					</div>
-					<div class="back-end-tools flex gap-2">
-						{#each skills.toolsAndLibraries.backEnd as backEndTools}
-							<div class="badge badge-outline">{backEndTools}</div>{/each}
-					</div>
-					<div class="platform flex gap-2">
-						{#each skills.toolsAndLibraries.platforms as platform}
-							<div class="badge badge-outline">{platform}</div>
-						{/each}
+		<div class="tools-and-technologies">
+			<div class="card bg-base-200 shadow-sm">
+				<div class="card-body">
+					<h2 class="card-title">Tools and Libraries I am familiar with:</h2>
+					<div class="tools-and-technologies flex flex-col flex-wrap gap-2">
+						<div class="front-end-tools card flex flex-wrap gap-2 bg-base-300">
+							<div class="card-body">
+								<h2 class="card-title">Front End Tools:</h2>
+								<div class="tools flex flex-wrap gap-2">
+									<div class="tools flex flex-wrap gap-2">
+										{#each skills.toolsAndLibraries.frontEnd as frontEndTools}
+											<div class="badge badge-outline">{frontEndTools}</div>
+										{/each}
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="back-end-tools card flex flex-wrap gap-2 bg-base-300">
+							<div class="card-body">
+								<h2 class="card-title">Back End Tools:</h2>
+								<div class="tools flex flex-wrap gap-2">
+									{#each skills.toolsAndLibraries.backEnd as backEndTools}
+										<div class="badge badge-outline">{backEndTools}</div>{/each}
+								</div>
+							</div>
+						</div>
+						<div class="platform card flex flex-wrap gap-2 bg-base-300">
+							<div class="card-body">
+								<h2 class="card-title">Platforms:</h2>
+								<div class="tools flex flex-wrap gap-2">
+									{#each skills.toolsAndLibraries.platforms as platform}
+										<div class="badge badge-outline">{platform}</div>
+									{/each}
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
