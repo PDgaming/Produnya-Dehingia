@@ -58,3 +58,10 @@
 	</div>
 	<div class="accesibility"></div>
 </div>
+
+<style>
+	.lock-screen {
+		background-color: var(--base-300);
+		backdrop-filter: blur(20px);
+	}
+</style>

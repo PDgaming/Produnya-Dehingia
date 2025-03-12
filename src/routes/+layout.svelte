@@ -24,9 +24,15 @@
 		}
 	});
 	onMount(() => {
+		// LOCK
+		if (!localStorage.getItem('Locked')) {
+			localStorage.setItem('Locked', 'true');
+			locked.set(true);
+		}
 		if (localStorage.getItem('Locked') == 'false') {
 			locked.set(false);
 		}
+		// THEME
 		const storedTheme = localStorage.getItem('Theme');
 		if (storedTheme) {
 			theme.set(storedTheme);
@@ -40,8 +46,15 @@
 <div class="main-content grid h-screen w-screen overflow-hidden border-base-300">
 	{#if $locked}
 		<LockScreen />
+		<div class="fake-window absolute h-full w-full overflow-hidden bg-base-100">
+			{#if $isAppRoute}
+				<TitleBar />
+			{/if}
+			{@render children()}
+			<TaskBar />
+		</div>
 	{:else}
-		<div class="window h-full w-full overflow-hidden bg-base-100">
+		<div class="window absolute h-full w-full overflow-hidden bg-base-100">
 			{#if $isAppRoute}
 				<TitleBar />
 			{/if}
@@ -50,3 +63,11 @@
 		<TaskBar />
 	{/if}
 </div>
+
+<div class="fake-window hidden"></div>
+
+<style>
+	.fake-window {
+		z-index: -10;
+	}
+</style>

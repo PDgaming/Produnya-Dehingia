@@ -1,14 +1,31 @@
 <script lang="ts">
 	import { appsList } from '$lib/store/store';
+	import { writable } from 'svelte/store';
+	import StartMenu from './startMenu.svelte';
+
+	let showStartMenu = writable<boolean>(true);
 </script>
+
+{#if $showStartMenu}
+	<div class="start-menu absolute bottom-0 z-10 mb-12 flex w-full justify-center">
+		<StartMenu />
+	</div>
+{/if}
 
 <div
 	class="task-bar absolute bottom-0 left-0 right-0 flex h-12 w-full justify-center gap-3 overflow-hidden bg-base-300 p-1"
 >
 	<button
-		class="start-menu aria-label='Start Menu' flex h-full w-10 items-center justify-center bg-blue-400"
+		class="aria-label='Start Menu' flex h-full w-10 items-center justify-center bg-blue-400"
 		aria-label="Start Menu"
 		title="Start Menu"
+		on:click={() => {
+			if (!$showStartMenu) {
+				showStartMenu.set(true);
+			} else {
+				showStartMenu.set(false);
+			}
+		}}
 	>
 		<div class="vertical-line absolute h-10 w-1 bg-gray-900"></div>
 		<div class="horizontal-line h-1 w-full bg-gray-900"></div>
