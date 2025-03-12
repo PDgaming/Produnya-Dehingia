@@ -40,3 +40,4 @@ export const appsList = writable<appList[]>([
     }
 ])
 export const theme = writable('light');
+export const showStartMenu = writable(false)

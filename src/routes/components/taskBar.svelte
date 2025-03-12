@@ -1,9 +1,7 @@
 <script lang="ts">
-	import { appsList } from '$lib/store/store';
+	import { appsList, showStartMenu } from '$lib/store/store';
 	import { writable } from 'svelte/store';
 	import StartMenu from './startMenu.svelte';
-
-	let showStartMenu = writable<boolean>(true);
 </script>
 
 {#if $showStartMenu}
