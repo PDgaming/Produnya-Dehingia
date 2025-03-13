@@ -18,7 +18,7 @@
 	}
 </script>
 
-<div class="lock-screen flex flex-col items-center justify-center bg-gray-700">
+<div class="lock-screen flex flex-col items-center justify-center">
 	<div class="profile">
 		<div class="avatar">
 			<div class="w-40 rounded-full bg-gray-400">

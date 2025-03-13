@@ -11,30 +11,38 @@
 	<div class="title-bar absolute left-0 top-0 w-full">
 		<TitleBar />
 	</div>
-	<label class="mt-8 flex cursor-pointer gap-2 p-4">
-		<span class="label-text">Corporate</span>
-		<input
-			type="checkbox"
-			value="business"
-			class="theme-controller toggle"
-			checked={localStorage.getItem('Theme') == 'business'}
-			on:change={() => {
-				if (localStorage.getItem('Theme')) {
-					if (localStorage.getItem('Theme') == 'business') {
-						localStorage.setItem('Theme', 'light');
-						theme.set('light');
-					} else {
-						localStorage.setItem('Theme', 'business');
-						theme.set('business');
-					}
-				} else {
-					localStorage.setItem('Theme', 'business');
-					theme.set('business');
-				}
-			}}
-		/>
-		<span class="label-text">Business</span>
-	</label>
+	<div class="window-content mt-8 flex flex-col gap-4 p-4">
+		<div class="theme-selector">
+			<h2 class="text-2xl">Theme</h2>
+			<label class="flex cursor-pointer gap-2">
+				<span class="label-text">Corporate</span>
+				<input
+					type="checkbox"
+					value="business"
+					class="theme-controller toggle"
+					checked={localStorage.getItem('Theme') == 'business'}
+					on:change={() => {
+						if (localStorage.getItem('Theme')) {
+							if (localStorage.getItem('Theme') == 'business') {
+								localStorage.setItem('Theme', 'light');
+								theme.set('light');
+							} else {
+								localStorage.setItem('Theme', 'business');
+								theme.set('business');
+							}
+						} else {
+							localStorage.setItem('Theme', 'business');
+							theme.set('business');
+						}
+					}}
+				/>
+				<span class="label-text">Business</span>
+			</label>
+		</div>
+		<div class="background-image">
+			<h2 class="text-2xl">Background Image</h2>
+		</div>
+	</div>
 </div>
 
 <style>

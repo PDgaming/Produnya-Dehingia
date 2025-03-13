@@ -29,7 +29,7 @@
 {/if}
 
 <div
-	class="task-bar absolute bottom-0 left-0 right-0 flex h-12 w-full items-center justify-center gap-3 overflow-hidden bg-base-300 p-1"
+	class="task-bar absolute bottom-0 left-0 right-0 flex h-12 w-full items-center justify-center gap-3 overflow-hidden p-1"
 >
 	<button
 		class="aria-label='Start Menu' flex h-full w-10 items-center justify-center bg-blue-400"
@@ -95,3 +95,10 @@
 		</div>
 	</div>
 </div>
+
+<style>
+	.task-bar {
+		background-color: var(--base-300);
+		backdrop-filter: blur(200px);
+	}
+</style>

@@ -42,3 +42,10 @@ export const appsList = writable<appList[]>([
 export const theme = writable('light');
 export const showStartMenu = writable(false)
 export const currentApp = writable<appList["name"]>("")
+export const backgroundImages = writable(["background_image1.jpg",
+    "background_image2.png",
+    "background_image3.jpg",
+    "background_image4.jpg",
+    "background_image5.webp"
+])
+export const currentBackgroundImage = writable("background_image3.jpg")
