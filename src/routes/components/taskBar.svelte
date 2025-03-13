@@ -1,7 +1,25 @@
 <script lang="ts">
-	import { appsList, showStartMenu } from '$lib/store/store';
-	import { writable } from 'svelte/store';
+	import { appsList, currentApp, showStartMenu } from '$lib/store/store';
 	import StartMenu from './startMenu.svelte';
+	import { onMount } from 'svelte';
+
+	let date = new Date();
+	let dayOrNight = 'AM';
+
+	$: hour = date.getHours();
+	$: minute = date.getMinutes();
+	$: second = date.getSeconds();
+
+	$: today = date.getDate();
+	$: month = date.getMonth();
+	$: year = date.getFullYear();
+
+	onMount(() => {
+		const interval = setInterval(() => {
+			date = new Date();
+			dayOrNight = hour >= 12 ? 'PM' : 'AM';
+		}, 1000);
+	});
 </script>
 
 {#if $showStartMenu}
@@ -11,7 +29,7 @@
 {/if}
 
 <div
-	class="task-bar absolute bottom-0 left-0 right-0 flex h-12 w-full justify-center gap-3 overflow-hidden bg-base-300 p-1"
+	class="task-bar absolute bottom-0 left-0 right-0 flex h-12 w-full items-center justify-center gap-3 overflow-hidden bg-base-300 p-1"
 >
 	<button
 		class="aria-label='Start Menu' flex h-full w-10 items-center justify-center bg-blue-400"
@@ -29,8 +47,15 @@
 		<div class="horizontal-line h-1 w-full bg-gray-900"></div>
 	</button>
 	<div class="apps flex gap-3">
-		<a class="app" title="Home" href="/" aria-label="Home">
-			<div class="flex h-full w-10 items-center justify-center bg-gray-200">
+		<button
+			class="app"
+			title="Home"
+			on:click={() => {
+				currentApp.set('');
+			}}
+			aria-label="Home"
+		>
+			<div class="flex h-full w-10 items-center justify-center rounded-md bg-gray-200">
 				<svg
 					width="30px"
 					height="30px"
@@ -44,17 +69,29 @@
 					/>
 				</svg>
 			</div>
-		</a>
+		</button>
 		{#each $appsList as app}
-			<a class="app" title={app.name} href={app.route}>
-				<div
-					class="flex h-full w-10 items-center justify-center"
-					style="background-color: {app.iconColor}"
-				>
-					{@html app.svg}
-				</div>
-			</a>
+			<button
+				class="app flex h-10 w-10 items-center justify-center rounded-md"
+				title={app.name}
+				on:click={() => {
+					currentApp.set(app.name);
+				}}
+				aria-label={app.name}
+				style="background-color: {app.iconColor}"
+			>
+				{@html app.svg}
+			</button>
 		{/each}
 	</div>
-	<div class="system-tray"></div>
+	<div class="system-tray absolute right-0 p-4">
+		<div class="clock flex flex-col items-center justify-center">
+			<div class="time">
+				<p>{hour % 12 || 12}:{minute}:{second} {dayOrNight}</p>
+			</div>
+			<div class="date">
+				<p>{today}/{month}/{year}</p>
+			</div>
+		</div>
+	</div>
 </div>

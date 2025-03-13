@@ -1,48 +1,35 @@
 <script lang="ts">
-	import { page } from '$app/stores';
-	import { derived } from 'svelte/store';
-	import { appsList } from '$lib/store/store';
+	import { currentApp, appsList, theme } from '$lib/store/store';
 
-	let name: string = '';
-	let icon: string = '';
+	let icon: any = '';
 
-	const pathName = derived(page, ($page) => {
-		return $page.url.pathname.replace('/', '');
-	});
-
-	pathName.subscribe((value) => {
-		name = value
-			.replace('-', ' ')
-			.split(' ')
-			.map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-			.join(' ');
-
-		for (let i = 0; i < $appsList.length; i++) {
-			if ($appsList[i].name == name) {
-				icon = $appsList[i].svg;
-			}
-		}
+	appsList.subscribe((value) => {
+		icon = value.find((app) => app.name == $currentApp)?.svg;
 	});
 </script>
 
-<button
+<div
 	class="title-bar absolute top-0 z-50 flex h-auto w-full cursor-move flex-row bg-base-300"
 	id="window"
 >
 	<div class="content flex gap-2 p-1">
-		<div class="icon">{@html icon}</div>
+		<div class="icon">
+			{@html $theme == 'light' ? icon : icon.replaceAll('#000000', '#ffffff')}
+		</div>
 		<div class="title">
 			<h1 class="text-xl">
-				{name}
+				{$currentApp}
 			</h1>
 		</div>
 	</div>
 	<div class="control-window ml-auto flex h-10 items-center gap-5">
-		<a
+		<button
 			class="close-window flex h-full w-10 items-center justify-center hover:bg-red-600"
 			aria-label="Close Window"
 			title="Close Window"
-			href="/"
+			on:click={() => {
+				currentApp.set('');
+			}}
 		>
 			<svg
 				width="30px"
@@ -56,6 +43,6 @@
 					fill="#6B7280"
 				/>
 			</svg>
-		</a>
+		</button>
 	</div>
-</button>
+</div>

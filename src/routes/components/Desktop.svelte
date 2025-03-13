@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { appsList, theme } from '$lib/store/store';
+	import { appsList, theme, currentApp } from '$lib/store/store';
 	import { Canvas } from '@threlte/core';
 	import Scene from './Scene.svelte';
 </script>
@@ -7,21 +7,24 @@
 <div class="desktop flex p-2">
 	<div class="apps flex flex-col gap-3">
 		{#each $appsList as app}
-			<a class="app" title={app.name} href={app.route}>
-				<div
-					class="flex h-14 w-16 items-center justify-center bg-base-300 hover:bg-gray-300"
-					id="app"
-				>
+			<button
+				class="app rounded-md"
+				title={app.name}
+				on:click={() => {
+					currentApp.set(app.name);
+				}}
+			>
+				<div class="flex h-14 w-16 items-center justify-center" id="app">
 					{@html $theme == 'light' ? app.svg : app.svg.replaceAll('#000000', '#ffffff')}
 				</div>
-			</a>
+			</button>
 		{/each}
 	</div>
 	<div class="3D-scene flex flex-col">
-		<div class="threeD-modal">
-			<!-- <Canvas>
+		<!-- <div class="threeD-modal">
+			<Canvas>
 				<Scene />
-			</Canvas> -->
+			</Canvas>
 		</div>
 		<div class="credit ml-auto">
 			<p>
@@ -31,7 +34,7 @@
 					>Agor_2012 on Sketchfab</a
 				>
 			</p>
-		</div>
+		</div> -->
 	</div>
 </div>
 
@@ -39,8 +42,15 @@
 	.desktop {
 		height: calc(100vh - 48px);
 	}
-	.threeD-modal {
+	/* .threeD-modal {
 		width: calc(100vw - 80px);
 		height: calc(100vh - 80px);
+	} */
+	.app {
+		background-color: var(--base-300);
+		backdrop-filter: blur(100px);
+	}
+	.app:hover {
+		opacity: 0.5;
 	}
 </style>

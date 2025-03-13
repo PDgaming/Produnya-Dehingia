@@ -1,6 +1,6 @@
 <script>
 	import { theme } from '$lib/store/store';
-	import TitleBar from '../components/titleBar.svelte';
+	import TitleBar from './titleBar.svelte';
 	import { draggable } from '@neodrag/svelte';
 </script>
 

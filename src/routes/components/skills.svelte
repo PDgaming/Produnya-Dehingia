@@ -1,6 +1,6 @@
 <script lang="ts">
-	import TitleBar from '../components/titleBar.svelte';
-	import threlteLogo from './threlte.jpg';
+	import TitleBar from './titleBar.svelte';
+	import threlteLogo from '../../assets/images/threlte.jpg';
 	import { draggable } from '@neodrag/svelte';
 
 	let skills = {
@@ -467,13 +467,13 @@ fill="gray"/>
 </script>
 
 <div
-	class="skills absolute flex flex-col gap-3 overflow-y-scroll bg-base-100"
+	class="skills absolute flex flex-col gap-3 bg-base-100"
 	use:draggable={{ bounds: 'body', handle: '.title-bar' }}
 >
 	<div class="title-bar absolute left-0 top-0 w-full">
 		<TitleBar />
 	</div>
-	<div class="window-content mt-6 p-4">
+	<div class="window-content mt-6 overflow-y-scroll p-4">
 		<h1 class="text-3xl">My Skills:</h1>
 		<div class="skils flex flex-wrap gap-4">
 			<div class="programming-languages">

@@ -2,11 +2,16 @@
 	import '../app.css';
 	import { page } from '$app/stores';
 	import { derived } from 'svelte/store';
-	import { locked, theme } from '$lib/store/store';
+	import { locked, theme, currentApp } from '$lib/store/store';
 	import LockScreen from './components/lockScreen.svelte';
 	import TaskBar from './components/taskBar.svelte';
 	import { onMount } from 'svelte';
 	import Desktop from './components/Desktop.svelte';
+	import AboutMe from './components/aboutMe.svelte';
+	import Projects from './components/projects.svelte';
+	import Settings from './components/settings.svelte';
+	import Skills from './components/skills.svelte';
+	import Contact from './components/contact.svelte';
 
 	let { children } = $props();
 	const isAppRoute = derived(page, ($page) => {
@@ -40,6 +45,13 @@
 		theme.subscribe((value) => {
 			document.documentElement.setAttribute('data-theme', value);
 		});
+		const storedCurrentApp = localStorage.getItem('currentApp');
+		if (storedCurrentApp) {
+			currentApp.set(storedCurrentApp);
+		}
+		currentApp.subscribe((value) => {
+			localStorage.setItem('currentApp', value);
+		});
 	});
 </script>
 
@@ -55,6 +67,19 @@
 			<div class="desktop">
 				<Desktop />
 			</div>
+			{#if $currentApp && $currentApp != ''}
+				{#if $currentApp == 'About Me'}
+					<AboutMe />
+				{:else if $currentApp == 'Projects'}
+					<Projects />
+				{:else if $currentApp == 'Settings'}
+					<Settings />
+				{:else if $currentApp == 'Skills'}
+					<Skills />
+				{:else if $currentApp == 'Contact'}
+					<Contact />
+				{/if}
+			{/if}
 			{#if $isAppRoute}
 				<div class="window">
 					{@render children()}
