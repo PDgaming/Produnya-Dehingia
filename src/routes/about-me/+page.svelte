@@ -1,6 +1,15 @@
+<script>
+	import TitleBar from '../components/titleBar.svelte';
+	import { draggable } from '@neodrag/svelte';
+</script>
+
 <div
-	class="about-me absolute bottom-0 left-0 right-0 top-0 flex flex-col items-center justify-center gap-4"
+	class="about-me absolute flex flex-col items-center justify-center gap-4 bg-base-100"
+	use:draggable={{ bounds: 'body', handle: '.title-bar' }}
 >
+	<div class="title-bar absolute left-0 top-0 w-full">
+		<TitleBar />
+	</div>
 	<div class="avatar avatar-placeholder">
 		<div
 			class="w-24 rounded-full bg-orange-400 text-neutral-content ring ring-primary ring-offset-2 ring-offset-base-100"
@@ -23,3 +32,12 @@
 		</div>
 	</div>
 </div>
+
+<style>
+	.about-me {
+		height: 80%;
+		width: 70%;
+		top: 5%;
+		left: 15%;
+	}
+</style>

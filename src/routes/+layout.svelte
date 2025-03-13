@@ -6,10 +6,9 @@
 	import LockScreen from './components/lockScreen.svelte';
 	import TaskBar from './components/taskBar.svelte';
 	import { onMount } from 'svelte';
-	import TitleBar from './components/titleBar.svelte';
+	import Desktop from './components/Desktop.svelte';
 
 	let { children } = $props();
-
 	const isAppRoute = derived(page, ($page) => {
 		if (
 			$page.url.pathname.startsWith('/about-me') ||
@@ -23,6 +22,7 @@
 			return false;
 		}
 	});
+
 	onMount(() => {
 		// LOCK
 		if (!localStorage.getItem('Locked')) {
@@ -43,22 +43,23 @@
 	});
 </script>
 
-<div class="main-content grid h-screen w-screen overflow-hidden border-base-300">
+<div class="main-content grid h-screen w-screen border-base-300">
 	{#if $locked}
 		<LockScreen />
-		<div class="fake-window absolute h-full w-full overflow-hidden bg-base-100">
-			{#if $isAppRoute}
-				<TitleBar />
-			{/if}
-			{@render children()}
+		<div class="fake-window absolute h-full w-full">
+			<Desktop />
 			<TaskBar />
 		</div>
 	{:else}
-		<div class="window absolute h-full w-full overflow-hidden bg-base-100">
+		<div class="window absolute h-full w-full">
+			<div class="desktop">
+				<Desktop />
+			</div>
 			{#if $isAppRoute}
-				<TitleBar />
+				<div class="window">
+					{@render children()}
+				</div>
 			{/if}
-			{@render children()}
 		</div>
 		<TaskBar />
 	{/if}
@@ -69,5 +70,13 @@
 <style>
 	.fake-window {
 		z-index: -10;
+	}
+	.window {
+		background-image: url('../assets/images/background_image1.jpg');
+		background-size: cover;
+	}
+	.fake-window {
+		background-image: url('../assets/images/background_image1.jpg');
+		background-size: cover;
 	}
 </style>

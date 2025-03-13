@@ -19,9 +19,9 @@
 	</div>
 	<div class="3D-scene flex flex-col">
 		<div class="threeD-modal">
-			<Canvas>
+			<!-- <Canvas>
 				<Scene />
-			</Canvas>
+			</Canvas> -->
 		</div>
 		<div class="credit ml-auto">
 			<p>

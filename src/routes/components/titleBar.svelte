@@ -25,7 +25,10 @@
 	});
 </script>
 
-<div class="title-bar flex h-auto w-full flex-row bg-base-300">
+<button
+	class="title-bar absolute top-0 z-50 flex h-auto w-full cursor-move flex-row bg-base-300"
+	id="window"
+>
 	<div class="content flex gap-2 p-1">
 		<div class="icon">{@html icon}</div>
 		<div class="title">
@@ -55,4 +58,4 @@
 			</svg>
 		</a>
 	</div>
-</div>
+</button>

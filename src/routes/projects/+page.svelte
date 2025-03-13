@@ -1,5 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import TitleBar from '../components/titleBar.svelte';
+	import { draggable } from '@neodrag/svelte';
 
 	let repos: any[] = [];
 
@@ -10,8 +12,14 @@
 	});
 </script>
 
-<div class="repositories flex flex-col gap-4 overflow-y-scroll p-4">
-	<h1 class="text-3xl">Projects I have worked on:</h1>
+<div
+	class="repositories absolute flex flex-col gap-4 overflow-y-scroll bg-base-100 p-4"
+	use:draggable={{ bounds: 'body', handle: '.title-bar' }}
+>
+	<div class="title-bar absolute left-0 top-0 w-full">
+		<TitleBar />
+	</div>
+	<h1 class="mt-6 text-3xl">Projects I have worked on:</h1>
 	{#if repos.length > 0}
 		<div class="repo flex flex-wrap gap-3">
 			{#each repos as repo}
@@ -55,6 +63,12 @@
 
 <style>
 	.repositories {
-		height: calc(100vh - 100px);
+		height: calc(100vh - 80px);
+	}
+	.repositories {
+		height: 80%;
+		width: 70%;
+		top: 5%;
+		left: 15%;
 	}
 </style>

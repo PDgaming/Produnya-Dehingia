@@ -1,5 +1,7 @@
 <script lang="ts">
+	import TitleBar from '../components/titleBar.svelte';
 	import threlteLogo from './threlte.jpg';
+	import { draggable } from '@neodrag/svelte';
 
 	let skills = {
 		languages: [
@@ -464,69 +466,94 @@ fill="gray"/>
 	};
 </script>
 
-<div class="skills flex flex-col gap-3 overflow-y-scroll p-4">
-	<h1 class="text-3xl">My Skills:</h1>
-	<div class="skils flex justify-evenly gap-4">
-		<div class="programming-languages">
-			<div class="card w-80 bg-base-200 shadow-sm">
-				<div class="card-body">
-					<h2 class="card-title">Programming Languages:</h2>
-					<div class="languges flex flex-wrap gap-2">
-						{#each skills.languages as language}
-							<div class="language flex gap-2">
-								<div class="icon">
-									{@html language.svg}
+<div
+	class="skills absolute flex flex-col gap-3 overflow-y-scroll bg-base-100"
+	use:draggable={{ bounds: 'body', handle: '.title-bar' }}
+>
+	<div class="title-bar absolute left-0 top-0 w-full">
+		<TitleBar />
+	</div>
+	<div class="window-content mt-6 p-4">
+		<h1 class="text-3xl">My Skills:</h1>
+		<div class="skils flex flex-wrap gap-4">
+			<div class="programming-languages">
+				<div class="card w-80 bg-base-200 shadow-sm">
+					<div class="card-body">
+						<h2 class="card-title">Programming Languages:</h2>
+						<div class="languges flex flex-wrap gap-2">
+							{#each skills.languages as language}
+								<div class="language flex gap-2">
+									<div class="icon">
+										{@html language.svg}
+									</div>
+									<div class="content flex flex-col gap-2">
+										<div class="badge badge-outline">{language.name}</div>
+										<progress class="progress w-56" value={language.value} max="100"></progress>
+									</div>
 								</div>
-								<div class="content flex flex-col gap-2">
-									<div class="badge badge-outline">{language.name}</div>
-									<progress class="progress w-56" value={language.value} max="100"></progress>
-								</div>
-							</div>
-						{/each}
+							{/each}
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-		<div class="frameworks">
-			<div class="card w-80 bg-base-200 shadow-sm">
-				<div class="card-body">
-					<h2 class="card-title">Frameworks I have worked with:</h2>
-					<div class="frameworks flex flex-wrap gap-2">
-						{#each skills.frameworks as framework}
-							<div class="framework flex gap-2">
-								<div class="icon">{@html framework.svg}</div>
-								<div class="content flex flex-col gap-2">
-									<div class="badge badge-outline">{framework.name}</div>
-									<progress class="progress w-56" value={framework.value} max="100"></progress>
+			<div class="frameworks">
+				<div class="card w-80 bg-base-200 shadow-sm">
+					<div class="card-body">
+						<h2 class="card-title">Frameworks I have worked with:</h2>
+						<div class="frameworks flex flex-wrap gap-2">
+							{#each skills.frameworks as framework}
+								<div class="framework flex gap-2">
+									<div class="icon">{@html framework.svg}</div>
+									<div class="content flex flex-col gap-2">
+										<div class="badge badge-outline">{framework.name}</div>
+										<progress class="progress w-56" value={framework.value} max="100"></progress>
+									</div>
 								</div>
-							</div>
-						{/each}
+							{/each}
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-		<div class="tools-and-technologies">
-			<div class="card w-96 bg-base-200 shadow-sm">
-				<div class="card-body">
-					<h2 class="card-title">Tools and Libraries I am familiar with:</h2>
-					<div class="tools-and-technologies flex flex-col flex-wrap gap-2">
-						<div class="front-end-tools card flex flex-wrap gap-2 bg-base-300">
-							<div class="card-body">
-								<h2 class="card-title">Front End Tools:</h2>
-								<div class="tools flex flex-wrap gap-2">
+			<div class="tools-and-technologies">
+				<div class="card w-96 bg-base-200 shadow-sm">
+					<div class="card-body">
+						<h2 class="card-title">Tools and Libraries I am familiar with:</h2>
+						<div class="tools-and-technologies flex flex-col flex-wrap gap-2">
+							<div class="front-end-tools card flex flex-wrap gap-2 bg-base-300">
+								<div class="card-body">
+									<h2 class="card-title">Front End Tools:</h2>
 									<div class="tools flex flex-wrap gap-2">
-										{#each skills.toolsAndLibraries.frontEnd as frontEndTools}
-											<div class="front-end-tool flex gap-2">
-												<div class="icon">
-													{#if frontEndTools.name != 'Threlte'}
-														{@html frontEndTools.svg}
-													{:else}
-														<img src={threlteLogo} alt="threlte" width="30px" height="30px" />
-													{/if}
+										<div class="tools flex flex-wrap gap-2">
+											{#each skills.toolsAndLibraries.frontEnd as frontEndTools}
+												<div class="front-end-tool flex gap-2">
+													<div class="icon">
+														{#if frontEndTools.name != 'Threlte'}
+															{@html frontEndTools.svg}
+														{:else}
+															<img src={threlteLogo} alt="threlte" width="30px" height="30px" />
+														{/if}
+													</div>
+													<div class="content flex flex-col gap-2">
+														<div class="badge badge-outline">{frontEndTools.name}</div>
+														<progress class="progress w-56" value={frontEndTools.value} max="100"
+														></progress>
+													</div>
 												</div>
+											{/each}
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="back-end-tools card flex flex-wrap gap-2 bg-base-300">
+								<div class="card-body">
+									<h2 class="card-title">Back End Tools:</h2>
+									<div class="tools flex flex-wrap gap-2">
+										{#each skills.toolsAndLibraries.backEnd as backEndTools}
+											<div class="backend-tool flex gap-2">
+												<div class="icon">{@html backEndTools.svg}</div>
 												<div class="content flex flex-col gap-2">
-													<div class="badge badge-outline">{frontEndTools.name}</div>
-													<progress class="progress w-56" value={frontEndTools.value} max="100"
+													<div class="badge badge-outline">{backEndTools.name}</div>
+													<progress class="progress w-56" value={backEndTools.value} max="100"
 													></progress>
 												</div>
 											</div>
@@ -534,37 +561,21 @@ fill="gray"/>
 									</div>
 								</div>
 							</div>
-						</div>
-						<div class="back-end-tools card flex flex-wrap gap-2 bg-base-300">
-							<div class="card-body">
-								<h2 class="card-title">Back End Tools:</h2>
-								<div class="tools flex flex-wrap gap-2">
-									{#each skills.toolsAndLibraries.backEnd as backEndTools}
-										<div class="backend-tool flex gap-2">
-											<div class="icon">{@html backEndTools.svg}</div>
-											<div class="content flex flex-col gap-2">
-												<div class="badge badge-outline">{backEndTools.name}</div>
-												<progress class="progress w-56" value={backEndTools.value} max="100"
-												></progress>
+							<div class="platform card flex flex-wrap gap-2 bg-base-300">
+								<div class="card-body">
+									<h2 class="card-title">Platforms:</h2>
+									<div class="tools flex flex-wrap gap-2">
+										{#each skills.toolsAndLibraries.platforms as platform}
+											<div class="platform flex gap-2">
+												<div class="icon">{@html platform.svg}</div>
+												<div class="content flex flex-col gap-2">
+													<div class="badge badge-outline">{platform.name}</div>
+													<progress class="progress w-56" value={platform.value} max="100"
+													></progress>
+												</div>
 											</div>
-										</div>
-									{/each}
-								</div>
-							</div>
-						</div>
-						<div class="platform card flex flex-wrap gap-2 bg-base-300">
-							<div class="card-body">
-								<h2 class="card-title">Platforms:</h2>
-								<div class="tools flex flex-wrap gap-2">
-									{#each skills.toolsAndLibraries.platforms as platform}
-										<div class="platform flex gap-2">
-											<div class="icon">{@html platform.svg}</div>
-											<div class="content flex flex-col gap-2">
-												<div class="badge badge-outline">{platform.name}</div>
-												<progress class="progress w-56" value={platform.value} max="100"></progress>
-											</div>
-										</div>
-									{/each}
+										{/each}
+									</div>
 								</div>
 							</div>
 						</div>
@@ -577,6 +588,9 @@ fill="gray"/>
 
 <style>
 	.skills {
-		height: calc(100vh - 100px);
+		height: 80%;
+		width: 70%;
+		top: 5%;
+		left: 15%;
 	}
 </style>
