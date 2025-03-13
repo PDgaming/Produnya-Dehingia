@@ -1,5 +1,10 @@
 import { writable } from "svelte/store";
 import type { appList } from "$lib/types/types"
+import backgroundImage1 from '../../assets/images/background_image1.jpg';
+import backgroundImage2 from '../../assets/images/background_image2.png';
+import backgroundImage3 from '../../assets/images/background_image3.jpg';
+import backgroundImage4 from '../../assets/images/background_image4.jpg';
+import backgroundImage5 from '../../assets/images/background_image5.webp';
 
 export const locked = writable(true);
 export const appsList = writable<appList[]>([
@@ -42,10 +47,11 @@ export const appsList = writable<appList[]>([
 export const theme = writable('light');
 export const showStartMenu = writable(false)
 export const currentApp = writable<appList["name"]>("")
-export const backgroundImages = writable(["background_image1.jpg",
-    "background_image2.png",
-    "background_image3.jpg",
-    "background_image4.jpg",
-    "background_image5.webp"
+export const backgroundImages = writable([
+    { name: "background_image1.jpg", src: backgroundImage1 },
+    { name: "background_image2.png", src: backgroundImage2 },
+    { name: "background_image3.jpg", src: backgroundImage3 },
+    { name: "background_image4.jpg", src: backgroundImage4 },
+    { name: "background_image5.webp", src: backgroundImage5 }
 ])
-export const currentBackgroundImage = writable("background_image3.jpg")
+export const currentBackgroundImage = writable("background_image1")

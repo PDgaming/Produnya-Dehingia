@@ -53,27 +53,42 @@
 			localStorage.setItem('currentApp', value);
 		});
 		currentBackgroundImage.subscribe((value) => {
+			console.log(value);
 			const backgroundImageElement = document.getElementById('background-image') as HTMLDivElement;
 			if (backgroundImageElement) {
-				const currentBackgroundImageClass = backgroundImageElement.classList[1];
+				let currentBackgroundImageClass: string;
+
+				for (let i = 0; i < backgroundImageElement.classList.length; i++) {
+					console.log(backgroundImageElement.classList[i].startsWith('bg-image'));
+					if (backgroundImageElement.classList[i].startsWith('bg-image')) {
+						currentBackgroundImageClass = backgroundImageElement.classList[i];
+						console.log(currentBackgroundImageClass);
+						break;
+					}
+				}
 				switch (value) {
-					case 'background_image1.jpg':
+					case 'background_image1':
+						// @ts-expect-error
 						backgroundImageElement.classList.remove(currentBackgroundImageClass);
 						backgroundImageElement.classList.add('bg-image1');
 						break;
-					case 'background_image2.png':
+					case 'background_image2':
+						// @ts-expect-error
 						backgroundImageElement.classList.remove(currentBackgroundImageClass);
 						backgroundImageElement.classList.add('bg-image2');
 						break;
-					case 'background_image3.jpg':
+					case 'background_image3':
+						// @ts-expect-error
 						backgroundImageElement.classList.remove(currentBackgroundImageClass);
 						backgroundImageElement.classList.add('bg-image3');
 						break;
-					case 'background_image4.jpg':
+					case 'background_image4':
+						// @ts-expect-error
 						backgroundImageElement.classList.remove(currentBackgroundImageClass);
 						backgroundImageElement.classList.add('bg-image4');
 						break;
-					case 'background_image5.webp':
+					case 'background_image5':
+						// @ts-expect-error
 						backgroundImageElement.classList.remove(currentBackgroundImageClass);
 						backgroundImageElement.classList.add('bg-image5');
 						break;
