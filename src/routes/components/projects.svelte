@@ -26,7 +26,7 @@
 				{#each repos as repo}
 					{#if !repo.private}
 						{#if !repo.archived}
-							<div class="card w-96 bg-base-200 shadow-sm">
+							<div class="card h-48 w-80 bg-base-300 shadow-sm">
 								<a class="card-body" href={repo.html_url}>
 									<h2 class="card-title">{repo.name}</h2>
 									<p>
@@ -40,7 +40,7 @@
 								</a>
 							</div>
 						{:else}
-							<div class="card w-96 bg-red-400 shadow-sm">
+							<div class="card h-48 w-80 bg-red-400 shadow-sm">
 								<a class="card-body" href={repo.html_url}>
 									<h2 class="card-title">{repo.name}</h2>
 									<p>

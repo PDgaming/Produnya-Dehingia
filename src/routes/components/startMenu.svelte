@@ -86,7 +86,7 @@
 
 <style>
 	.start-menu {
-		height: calc(100vh - 230px);
+		height: calc(100vh - 600px);
 		width: 30rem;
 		background-color: var(--base-100);
 		backdrop-filter: blur(150px);

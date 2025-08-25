@@ -20,8 +20,8 @@
 			</button>
 		{/each}
 	</div>
-	<div class="3D-scene flex flex-col">
-		<!-- <div class="threeD-modal">
+	<!-- <div class="3D-scene flex flex-col">
+		<div class="threeD-modal">
 			<Canvas>
 				<Scene />
 			</Canvas>
@@ -34,8 +34,8 @@
 					>Agor_2012 on Sketchfab</a
 				>
 			</p>
-		</div> -->
-	</div>
+		</div>
+	</div> -->
 </div>
 
 <style>
