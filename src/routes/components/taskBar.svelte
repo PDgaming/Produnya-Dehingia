@@ -101,4 +101,10 @@
 		background-color: var(--base-300);
 		backdrop-filter: blur(200px);
 	}
+	.app {
+		transition: transform 0.2s ease-in-out;
+	}
+	.app:hover {
+		transform: scale(1.1);
+	}
 </style>

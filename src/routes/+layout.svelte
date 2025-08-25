@@ -52,44 +52,58 @@
 		currentApp.subscribe((value) => {
 			localStorage.setItem('currentApp', value);
 		});
+		if (localStorage.getItem('BackgroundImage')) {
+			let localBackground = localStorage
+				.getItem('BackgroundImage')
+				?.replace('.jpg', '')
+				.replace('.png', '');
+			console.log('local background', localBackground);
+
+			if (localBackground) {
+				const backgroundImageElement = document.getElementById(
+					'background-image'
+				) as HTMLDivElement;
+				if (backgroundImageElement) {
+					const BackgroundImageClass = backgroundImageElement.classList;
+					for (let i = 0; i < BackgroundImageClass.length; i++) {
+						// console.log(currentBackgroundImageClass[i]);
+						if (BackgroundImageClass[i].startsWith('bg-image')) {
+							console.log('current image:', BackgroundImageClass[i]);
+							backgroundImageElement.classList.remove(BackgroundImageClass[i]);
+						}
+					}
+					currentBackgroundImage.set(localBackground);
+				}
+			}
+		}
 		currentBackgroundImage.subscribe((value) => {
 			console.log(value);
 			const backgroundImageElement = document.getElementById('background-image') as HTMLDivElement;
 			if (backgroundImageElement) {
-				let currentBackgroundImageClass: string;
+				const BackgroundImageClass = backgroundImageElement.classList;
+				// console.log(currentBackgroundImageClass);
 
-				for (let i = 0; i < backgroundImageElement.classList.length; i++) {
-					console.log(backgroundImageElement.classList[i].startsWith('bg-image'));
-					if (backgroundImageElement.classList[i].startsWith('bg-image')) {
-						currentBackgroundImageClass = backgroundImageElement.classList[i];
-						console.log(currentBackgroundImageClass);
-						break;
+				for (let i = 0; i < BackgroundImageClass.length; i++) {
+					// console.log(currentBackgroundImageClass[i]);
+					if (BackgroundImageClass[i].startsWith('bg-image')) {
+						// console.log('current image:', BackgroundImageClass[i]);
+						backgroundImageElement.classList.remove(BackgroundImageClass[i]);
 					}
 				}
 				switch (value) {
 					case 'background_image1':
-						// @ts-expect-error
-						backgroundImageElement.classList.remove(currentBackgroundImageClass);
 						backgroundImageElement.classList.add('bg-image1');
 						break;
 					case 'background_image2':
-						// @ts-expect-error
-						backgroundImageElement.classList.remove(currentBackgroundImageClass);
 						backgroundImageElement.classList.add('bg-image2');
 						break;
 					case 'background_image3':
-						// @ts-expect-error
-						backgroundImageElement.classList.remove(currentBackgroundImageClass);
 						backgroundImageElement.classList.add('bg-image3');
 						break;
 					case 'background_image4':
-						// @ts-expect-error
-						backgroundImageElement.classList.remove(currentBackgroundImageClass);
 						backgroundImageElement.classList.add('bg-image4');
 						break;
 					case 'background_image5':
-						// @ts-expect-error
-						backgroundImageElement.classList.remove(currentBackgroundImageClass);
 						backgroundImageElement.classList.add('bg-image5');
 						break;
 				}

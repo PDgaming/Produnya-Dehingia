@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { appsList, locked, showStartMenu, theme } from '$lib/store/store';
+	import { appsList, currentApp, locked, showStartMenu, theme } from '$lib/store/store';
 	import { writable } from 'svelte/store';
 
 	let powerMenu = writable(false);
@@ -16,7 +16,7 @@
 					title={app.name}
 					on:click={() => {
 						showStartMenu.set(false);
-						goto(app.route);
+						currentApp.set(app.name);
 					}}
 				>
 					<div class="flex items-center justify-center" id="app">
@@ -31,6 +31,7 @@
 			<button
 				class="btn btn-ghost flex gap-2 p-2"
 				on:click={() => {
+					currentApp.set('');
 					powerMenu.set(false);
 					showStartMenu.set(false);
 					localStorage.setItem('Locked', 'true');

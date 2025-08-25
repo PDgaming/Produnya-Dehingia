@@ -2,8 +2,6 @@
 	import { theme, currentBackgroundImage, backgroundImages } from '$lib/store/store';
 	import TitleBar from './titleBar.svelte';
 	import { draggable } from '@neodrag/svelte';
-
-	currentBackgroundImage.subscribe((value) => {});
 </script>
 
 <div
@@ -59,6 +57,7 @@
 							<button
 								on:click={() => {
 									currentBackgroundImage.set(backgroundImage.name.split('.')[0]);
+									localStorage.setItem('BackgroundImage', backgroundImage.name);
 								}}
 							>
 								<img

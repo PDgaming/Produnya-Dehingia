@@ -35,7 +35,6 @@
 		"@tailwindcss/typography": "^0.5.15",
 		"@threlte/core": "^8.0.1",
 		"@threlte/extras": "^9.0.1",
-		"date-fns": "^4.1.0",
-		"three": "^0.174.0"
+		"date-fns": "^4.1.0"
 	}
 }
