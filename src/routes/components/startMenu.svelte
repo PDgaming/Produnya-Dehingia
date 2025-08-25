@@ -8,7 +8,7 @@
 
 <div class="start-menu rounded-md bg-base-100">
 	<div class="pinned-section flex flex-col gap-3 p-4">
-		<h2>Pinned</h2>
+		<h2 class="text-2xl">Pinned</h2>
 		<div class="apps flex flex-row flex-wrap gap-3">
 			{#each $appsList as app}
 				<button
@@ -86,6 +86,9 @@
 </div>
 
 <style>
+	.app {
+		border: 1px solid black;
+	}
 	.start-menu {
 		height: calc(100vh - 600px);
 		width: 30rem;
