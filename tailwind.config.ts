@@ -1,18 +1,13 @@
-import containerQueries from '@tailwindcss/container-queries';
-import forms from '@tailwindcss/forms';
-import typography from '@tailwindcss/typography';
-import type { Config } from 'tailwindcss';
-import daisyui from "daisyui";
+import daisyui from 'daisyui';
 
+/** @type {import('tailwindcss').Config} */
 export default {
 	content: ['./src/**/*.{html,js,svelte,ts}'],
-
 	theme: {
 		extend: {}
 	},
-
-	plugins: [typography, forms, containerQueries, daisyui],
+	plugins: [daisyui],
 	daisyui: {
-		themes: ['light', "business"]
+		themes: ['light', 'business']
 	}
-} satisfies Config;
+};
