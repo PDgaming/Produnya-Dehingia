@@ -10,12 +10,12 @@
 	} from '$lib/store/store.svelte';
 	import Bar from '../components/bar.svelte';
 	import { onMount, type Component } from 'svelte';
-	import Desktop from '../components/Desktop.svelte';
-	import AboutMe from '../components/aboutMe.svelte';
-	import Projects from '../components/projects.svelte';
-	import Settings from '../components/settings.svelte';
-	import Skills from '../components/skills.svelte';
-	import Contact from '../components/contact.svelte';
+	import Desktop from '@components/Desktop.svelte';
+	import AboutMe from '@components/aboutMe.svelte';
+	import Projects from '@components/projects.svelte';
+	import Settings from '@components/settings.svelte';
+	import Skills from '@components/skills.svelte';
+	import Contact from '@components/contact.svelte';
 
 	let { children } = $props();
 	const isAppRoute = derived(page, ($page) => {
@@ -46,6 +46,7 @@
 	);
 
 	onMount(() => {
+		// Theme
 		const storedTheme = localStorage.getItem('Theme');
 		if (storedTheme) {
 			theme.value = storedTheme;
@@ -53,6 +54,8 @@
 		$effect(() => {
 			document.documentElement.setAttribute('data-theme', theme.value);
 		});
+
+		// Current App
 		const storedCurrentApp = localStorage.getItem('currentApp');
 		if (storedCurrentApp) {
 			currentApp.value = storedCurrentApp;
@@ -60,6 +63,8 @@
 		$effect(() => {
 			localStorage.setItem('currentApp', currentApp.value);
 		});
+
+		// Background Image
 		if (localStorage.getItem('BackgroundImage')) {
 			let localBackground = localStorage
 				.getItem('BackgroundImage')

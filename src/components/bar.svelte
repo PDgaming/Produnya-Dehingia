@@ -1,9 +1,8 @@
 <script lang="ts">
 	import { appsList, currentApp } from '$lib/store/store.svelte';
-	import { onMount } from 'svelte';
 
 	let date = $state(new Date());
-	let dayOrNight = $state('AM');
+	let dayOrNight = $derived(date.getHours() > 12 ? 'PM' : 'AM');
 
 	let hour: number = $derived(date.getHours());
 	let minute = $derived(date.getMinutes());
@@ -12,13 +11,6 @@
 	let today = $derived(date.getDate());
 	let month = $derived(date.getMonth());
 	let year = $derived(date.getFullYear());
-
-	onMount(() => {
-		setInterval(() => {
-			date = new Date();
-			dayOrNight = hour >= 12 ? 'PM' : 'AM';
-		}, 1000);
-	});
 </script>
 
 <div
