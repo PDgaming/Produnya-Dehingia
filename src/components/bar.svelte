@@ -14,7 +14,7 @@
 </script>
 
 <div
-	class="task-bar absolute right-0 left-0 z-100 flex h-12 w-full items-center justify-center gap-3 overflow-hidden p-1"
+	class="task-bar absolute right-0 bottom-0 left-0 z-100 flex h-12 w-full items-center justify-center gap-3 overflow-hidden p-1"
 >
 	<div class="apps flex gap-3">
 		<button

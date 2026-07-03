@@ -4,10 +4,7 @@
 	let icon = $derived(appsList.value.find((app) => app.name === currentApp.value)?.svg ?? '');
 </script>
 
-<div
-	class="title-bar bg-base-300 absolute top-0 z-50 flex h-auto w-full cursor-move flex-row"
-	id="window"
->
+<div class="title-bar bg-base-300 top-0 z-50 flex h-auto w-full cursor-move flex-row" id="window">
 	<div class="content flex gap-2 p-1">
 		<div class="icon">
 			{@html icon}
