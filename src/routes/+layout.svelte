@@ -30,13 +30,13 @@
 
 	onMount(() => {
 		// LOCK
-		if (!localStorage.getItem('Locked')) {
-			localStorage.setItem('Locked', 'true');
-			locked.set(true);
-		}
-		if (localStorage.getItem('Locked') == 'false') {
-			locked.set(false);
-		}
+		// if (!localStorage.getItem('Locked')) {
+		// 	localStorage.setItem('Locked', 'true');
+		// 	locked.set(true);
+		// }
+		// if (localStorage.getItem('Locked') == 'false') {
+		// 	locked.set(false);
+		// }
 		// THEME
 		const storedTheme = localStorage.getItem('Theme');
 		if (storedTheme) {
@@ -112,8 +112,8 @@
 	});
 </script>
 
-<div class="main-content grid h-screen w-screen border-base-300">
-	{#if $locked}
+<div class="main-content border-base-300 grid h-screen w-screen">
+	<!-- {#if $locked}
 		<LockScreen />
 		<div class="fake-window bg-image1 absolute h-full w-full" id="background-image">
 			<div class="desktop">
@@ -138,32 +138,32 @@
 				</div>
 			{/if}
 		</div>
-	{:else}
-		<div class="window bg-image1 absolute h-full w-full" id="background-image">
-			<div class="desktop">
-				<Desktop />
-			</div>
-			{#if $currentApp && $currentApp != ''}
-				{#if $currentApp == 'About Me'}
-					<AboutMe />
-				{:else if $currentApp == 'Projects'}
-					<Projects />
-				{:else if $currentApp == 'Settings'}
-					<Settings />
-				{:else if $currentApp == 'Skills'}
-					<Skills />
-				{:else if $currentApp == 'Contact'}
-					<Contact />
-				{/if}
-			{/if}
-			{#if $isAppRoute}
-				<div class="window">
-					{@render children()}
-				</div>
-			{/if}
+	{:else} -->
+	<div class="window bg-image1 absolute h-full w-full" id="background-image">
+		<div class="desktop">
+			<Desktop />
 		</div>
-		<TaskBar />
-	{/if}
+		{#if $currentApp && $currentApp != ''}
+			{#if $currentApp == 'About Me'}
+				<AboutMe />
+			{:else if $currentApp == 'Projects'}
+				<Projects />
+			{:else if $currentApp == 'Settings'}
+				<Settings />
+			{:else if $currentApp == 'Skills'}
+				<Skills />
+			{:else if $currentApp == 'Contact'}
+				<Contact />
+			{/if}
+		{/if}
+		{#if $isAppRoute}
+			<div class="window">
+				{@render children()}
+			</div>
+		{/if}
+	</div>
+	<TaskBar />
+	<!-- {/if} -->
 </div>
 
 <div class="fake-window bg-image1 bg-image2 bg-image3 bg-image4 bg-image5 hidden"></div>
