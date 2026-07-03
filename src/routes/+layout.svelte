@@ -8,7 +8,6 @@
 		currentBackgroundImage,
 		backgroundImages
 	} from '$lib/store/store.svelte';
-	import Bar from '../components/navbar.svelte';
 	import { onMount, type Component } from 'svelte';
 	import Desktop from '@components/Desktop.svelte';
 	import AboutMe from '@components/apps/aboutMe.svelte';
