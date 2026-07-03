@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { appsList, currentApp } from '$lib/store/store.svelte';
+	import { onMount } from 'svelte';
 
 	let date = $state(new Date());
 	let dayOrNight = $derived(date.getHours() > 12 ? 'PM' : 'AM');
@@ -11,6 +12,16 @@
 	let today = $derived(date.getDate());
 	let month = $derived(date.getMonth());
 	let year = $derived(date.getFullYear());
+
+	onMount(() => {
+		const interval = setInterval(() => {
+			date = new Date();
+		}, 1000);
+
+		return () => {
+			clearInterval(interval);
+		};
+	});
 </script>
 
 <div
