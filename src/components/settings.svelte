@@ -1,14 +1,15 @@
-<script>
-	import { theme, currentBackgroundImage, backgroundImages } from '$lib/store/store';
+<script lang="ts">
+	import { theme, currentBackgroundImage, backgroundImages } from '$lib/store/store.svelte';
 	import TitleBar from './titleBar.svelte';
 	import { draggable } from '@neodrag/svelte';
+	import './window.css';
 </script>
 
 <div
-	class="settings absolute w-full bg-base-100"
+	class="settings window bg-base-100 absolute w-full"
 	use:draggable={{ bounds: 'body', handle: '.title-bar' }}
 >
-	<div class="title-bar absolute left-0 top-0 w-full">
+	<div class="title-bar absolute top-0 left-0 w-full">
 		<TitleBar />
 	</div>
 	<div class="window-content mt-8 flex flex-col gap-4 overflow-y-scroll p-4">
@@ -21,18 +22,18 @@
 					value="business"
 					class="theme-controller toggle"
 					checked={localStorage.getItem('Theme') == 'business'}
-					on:change={() => {
+					onchange={() => {
 						if (localStorage.getItem('Theme')) {
 							if (localStorage.getItem('Theme') == 'business') {
 								localStorage.setItem('Theme', 'light');
-								theme.set('light');
+								theme.value = 'light';
 							} else {
 								localStorage.setItem('Theme', 'business');
-								theme.set('business');
+								theme.value = 'business';
 							}
 						} else {
 							localStorage.setItem('Theme', 'business');
-							theme.set('business');
+							theme.value = 'business';
 						}
 					}}
 				/>
@@ -42,9 +43,9 @@
 		<div class="background-image">
 			<h2 class="text-2xl">Background Image</h2>
 			<div class="all-images flex flex-row flex-wrap gap-5 p-2">
-				{#each $backgroundImages as backgroundImage}
+				{#each backgroundImages.value as backgroundImage (backgroundImage.name)}
 					<div class="image-option flex flex-col items-center justify-center gap-2">
-						{#if backgroundImage.name == $currentBackgroundImage}
+						{#if backgroundImage.name == currentBackgroundImage.value}
 							<button class="rounded-2xl border-4 border-slate-300">
 								<img
 									src={backgroundImage.src}
@@ -55,8 +56,8 @@
 							</button>
 						{:else}
 							<button
-								on:click={() => {
-									currentBackgroundImage.set(backgroundImage.name.split('.')[0]);
+								onclick={() => {
+									currentBackgroundImage.value = backgroundImage.name.split('.')[0];
 									localStorage.setItem('BackgroundImage', backgroundImage.name);
 								}}
 							>
@@ -79,12 +80,6 @@
 </div>
 
 <style>
-	.settings {
-		height: 80%;
-		width: 70%;
-		top: 5%;
-		left: 15%;
-	}
 	.window-content {
 		height: 90%;
 	}

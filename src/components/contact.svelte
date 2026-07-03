@@ -1,18 +1,19 @@
-<script>
+<script lang="ts">
 	import TitleBar from './titleBar.svelte';
 	import { draggable } from '@neodrag/svelte';
+	import './window.css';
 </script>
 
 <div
-	class="contact absolute flex w-full flex-col gap-2 bg-base-100"
+	class="contact window bg-base-100 absolute flex w-full flex-col gap-2"
 	use:draggable={{ bounds: 'body', handle: '.title-bar' }}
 >
-	<div class="title-bar absolute left-0 top-0 w-full"><TitleBar /></div>
+	<div class="title-bar absolute top-0 left-0 w-full"><TitleBar /></div>
 	<div class="window-content p-4">
 		<h1 class="mt-6 text-4xl">Contact Me:</h1>
 		<div class="email">
 			<p>
-				Send an Email: <a class="link" href="produnyadehingia@gmail.com"
+				Send an Email: <a class="link" href="mailto:produnyadehingia@gmail.com"
 					>produnyadehingia@gmail.com</a
 				>
 			</p>
@@ -33,12 +34,3 @@
 		</div>
 	</div>
 </div>
-
-<style>
-	.contact {
-		height: 80%;
-		width: 70%;
-		top: 5%;
-		left: 15%;
-	}
-</style>

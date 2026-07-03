@@ -1,57 +1,35 @@
 <script lang="ts">
-	import { appsList, currentApp, showStartMenu } from '$lib/store/store';
-	import StartMenu from './startMenu.svelte';
+	import { appsList, currentApp } from '$lib/store/store.svelte';
 	import { onMount } from 'svelte';
 
-	let date = new Date();
-	let dayOrNight = 'AM';
+	let date = $state(new Date());
+	let dayOrNight = $state('AM');
 
-	$: hour = date.getHours();
-	$: minute = date.getMinutes();
-	$: second = date.getSeconds();
+	let hour: number = $derived(date.getHours());
+	let minute = $derived(date.getMinutes());
+	let second = $derived(date.getSeconds());
 
-	$: today = date.getDate();
-	$: month = date.getMonth();
-	$: year = date.getFullYear();
+	let today = $derived(date.getDate());
+	let month = $derived(date.getMonth());
+	let year = $derived(date.getFullYear());
 
 	onMount(() => {
-		const interval = setInterval(() => {
+		setInterval(() => {
 			date = new Date();
 			dayOrNight = hour >= 12 ? 'PM' : 'AM';
 		}, 1000);
 	});
 </script>
 
-{#if $showStartMenu}
-	<div class="start-menu absolute bottom-0 z-10 mb-12 flex w-full justify-center">
-		<StartMenu />
-	</div>
-{/if}
-
 <div
-	class="task-bar absolute bottom-0 left-0 right-0 flex h-12 w-full items-center justify-center gap-3 overflow-hidden p-1"
+	class="task-bar absolute right-0 left-0 z-100 flex h-12 w-full items-center justify-center gap-3 overflow-hidden p-1"
 >
-	<button
-		class="aria-label='Start Menu' rounded-sl flex h-full w-10 items-center justify-center bg-blue-400"
-		aria-label="Start Menu"
-		title="Start Menu"
-		on:click={() => {
-			if (!$showStartMenu) {
-				showStartMenu.set(true);
-			} else {
-				showStartMenu.set(false);
-			}
-		}}
-	>
-		<div class="vertical-line absolute h-10 w-1 bg-gray-900"></div>
-		<div class="horizontal-line h-1 w-full bg-gray-900"></div>
-	</button>
 	<div class="apps flex gap-3">
 		<button
 			class="app"
 			title="Home"
-			on:click={() => {
-				currentApp.set('');
+			onclick={() => {
+				currentApp.value = '';
 			}}
 			aria-label="Home"
 		>
@@ -70,12 +48,12 @@
 				</svg>
 			</div>
 		</button>
-		{#each $appsList as app}
+		{#each appsList.value as app (app.name)}
 			<button
 				class="app flex h-10 w-10 items-center justify-center rounded-md"
 				title={app.name}
-				on:click={() => {
-					currentApp.set(app.name);
+				onclick={() => {
+					currentApp.value = app.name;
 				}}
 				aria-label={app.name}
 				style="background-color: {app.iconColor}"
@@ -99,7 +77,7 @@
 <style>
 	.task-bar {
 		background-color: var(--base-300);
-		backdrop-filter: blur(200px);
+		backdrop-filter: blur(10px);
 	}
 	.app {
 		transition: transform 0.2s ease-in-out;

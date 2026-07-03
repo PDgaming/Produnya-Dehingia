@@ -1,24 +1,28 @@
 <script lang="ts">
-	import { currentApp, appsList, theme } from '$lib/store/store';
+	import { currentApp, appsList } from '$lib/store/store.svelte';
 
-	let icon: any = '';
+	let icon: any = $state('');
 
-	appsList.subscribe((value) => {
-		icon = value.find((app) => app.name == $currentApp)?.svg;
+	$effect(() => {
+		appsList.value.forEach((app) => {
+			if (app.name == currentApp.value) {
+				icon = app.svg;
+			}
+		});
 	});
 </script>
 
 <div
-	class="title-bar absolute top-0 z-50 flex h-auto w-full cursor-move flex-row bg-base-300"
+	class="title-bar bg-base-300 absolute top-0 z-50 flex h-auto w-full cursor-move flex-row"
 	id="window"
 >
 	<div class="content flex gap-2 p-1">
 		<div class="icon">
-			{@html $theme == 'light' ? icon : icon.replaceAll('#000000', '#ffffff')}
+			{@html icon}
 		</div>
 		<div class="title">
 			<h1 class="text-xl">
-				{$currentApp}
+				{currentApp.value}
 			</h1>
 		</div>
 	</div>
@@ -27,8 +31,8 @@
 			class="close-window flex h-full w-10 items-center justify-center hover:bg-red-600"
 			aria-label="Close Window"
 			title="Close Window"
-			on:click={() => {
-				currentApp.set('');
+			onclick={() => {
+				currentApp.value = '';
 			}}
 		>
 			<svg
