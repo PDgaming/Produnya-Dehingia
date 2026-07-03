@@ -43,35 +43,6 @@ use:draggable={{ bounds: 'body', handle: '.title-bar' }}
 
 Then each app becomes just its content — no imports of TitleBar, draggable, or window.css.
 
-
-## 3. Clean up the store pattern
-
-Current stores wrap everything in `{ value: ... }` to preserve reactivity at module level:
-
-```typescript
-export const theme = $state<{ value: string }>({ value: 'light' });
-export const currentApp = $state<{ value: appList["name"] }>({ value: "" });
-```
-
-Replace with a `ref()` helper for clarity:
-
-```typescript
-// src/lib/store/store.svelte.ts
-function ref<T>(initial: T) {
-  let v = $state(initial) as T;
-  return {
-    get value() { return v; },
-    set value(next: T) { v = next; },
-  };
-}
-
-export const theme = ref('light');
-export const currentApp = ref('');
-export const currentBackgroundImage = ref('background_image1');
-```
-
-Same API (`theme.value`) but no manual wrapper objects.
-
 ---
 
 ## 4. Centralize localStorage effects in the store
@@ -89,25 +60,6 @@ $effect(() => {
 ```
 
 Components only ever touch `theme.value` — no direct localStorage access.
-
----
-
-## 5. Replace `$effect` with `$derived` in titleBar.svelte
-
-```svelte
-// Before:
-let icon = $state('');
-$effect(() => {
-  appsList.value.forEach((app) => {
-    if (app.name == currentApp.value) icon = app.svg;
-  });
-});
-
-// After:
-let icon = $derived(
-  appsList.value.find(a => a.name === currentApp.value)?.svg ?? ''
-);
-```
 
 ---
 

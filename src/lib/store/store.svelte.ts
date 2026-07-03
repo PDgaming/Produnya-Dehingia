@@ -1,9 +1,10 @@
-import type { appList, backgroundImage } from "$lib/types/types"
+import type { appList } from "$lib/types/types"
 import backgroundImage1 from '../../assets/images/background_image1.webp';
 import backgroundImage2 from '../../assets/images/background_image2.webp';
 import backgroundImage3 from '../../assets/images/background_image3.webp';
 import backgroundImage4 from '../../assets/images/background_image4.webp';
 import backgroundImage5 from '../../assets/images/background_image5.webp';
+import { ref } from "./helper.svelte";
 
 export const appsList = $state<{ value: appList[] }>({
     value: [
@@ -44,15 +45,13 @@ export const appsList = $state<{ value: appList[] }>({
         }
     ]
 })
-export const theme = $state<{ value: string }>({ value: 'light' });
-export const currentApp = $state<{ value: appList["name"] }>({ value: "" })
-export const backgroundImages = $state<{ value: backgroundImage[] }>({
-    value: [
-        { name: "background_image1.webp", src: backgroundImage1 },
-        { name: "background_image2.webp", src: backgroundImage2 },
-        { name: "background_image3.webp", src: backgroundImage3 },
-        { name: "background_image4.webp", src: backgroundImage4 },
-        { name: "background_image5.webp", src: backgroundImage5 }
-    ]
-})
-export const currentBackgroundImage = $state<{ value: string }>({ value: "background_image1" })
+export const theme = ref('light');
+export const currentApp = ref("");
+export const backgroundImages = ref([
+    { name: "background_image1.webp", src: backgroundImage1 },
+    { name: "background_image2.webp", src: backgroundImage2 },
+    { name: "background_image3.webp", src: backgroundImage3 },
+    { name: "background_image4.webp", src: backgroundImage4 },
+    { name: "background_image5.webp", src: backgroundImage5 }
+])
+export const currentBackgroundImage = ref("background_image1")

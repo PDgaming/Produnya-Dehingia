@@ -4,8 +4,3 @@ export type appList = {
     svg: string,
     route: string
 }
-
-export type backgroundImage = {
-    name: string,
-    src: string
-}
