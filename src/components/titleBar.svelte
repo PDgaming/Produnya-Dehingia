@@ -1,15 +1,7 @@
 <script lang="ts">
 	import { currentApp, appsList } from '$lib/store/store.svelte';
 
-	let icon: any = $state('');
-
-	$effect(() => {
-		appsList.value.forEach((app) => {
-			if (app.name == currentApp.value) {
-				icon = app.svg;
-			}
-		});
-	});
+	let icon = $derived(appsList.value.find((app) => app.name === currentApp.value)?.svg ?? '');
 </script>
 
 <div
