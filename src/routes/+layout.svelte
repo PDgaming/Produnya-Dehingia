@@ -1,5 +1,5 @@
 <script lang="ts">
-	import '../app.css';
+	import './layout.css';
 	import { page } from '$app/stores';
 	import { derived } from 'svelte/store';
 	import {
