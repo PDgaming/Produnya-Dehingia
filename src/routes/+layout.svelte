@@ -11,11 +11,12 @@
 	import Bar from '../components/bar.svelte';
 	import { onMount, type Component } from 'svelte';
 	import Desktop from '@components/Desktop.svelte';
-	import AboutMe from '@components/aboutMe.svelte';
-	import Projects from '@components/projects.svelte';
-	import Settings from '@components/settings.svelte';
-	import Skills from '@components/skills.svelte';
-	import Contact from '@components/contact.svelte';
+	import AboutMe from '@components/apps/aboutMe.svelte';
+	import Projects from '@components/apps/projects.svelte';
+	import Settings from '@components/apps/settings.svelte';
+	import Skills from '@components/apps/skills.svelte';
+	import Contact from '@components/apps/contact.svelte';
+	import Window from '@components/window.svelte';
 
 	let { children } = $props();
 	const isAppRoute = derived(page, ($page) => {
@@ -77,14 +78,15 @@
 	});
 </script>
 
-<div class="main-content border-base-300 flex h-screen w-screen overflow-hidden">
-	<Bar />
+<div class="main-content border-base-300 flex h-screen w-screen flex-col overflow-hidden">
 	<div class="background h-full w-full" id="background-image" style={bgStyle}>
 		<div class="desktop mt-15">
 			<Desktop />
 		</div>
 		{#if currentApp.value}
-			<App />
+			<Window>
+				<App />
+			</Window>
 		{/if}
 		{#if $isAppRoute}
 			<div class="window">
@@ -92,6 +94,7 @@
 			</div>
 		{/if}
 	</div>
+	<Bar />
 </div>
 
 <style>
