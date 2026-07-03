@@ -2,7 +2,12 @@
 	import '../app.css';
 	import { page } from '$app/stores';
 	import { derived } from 'svelte/store';
-	import { theme, currentApp, currentBackgroundImage } from '$lib/store/store.svelte';
+	import {
+		theme,
+		currentApp,
+		currentBackgroundImage,
+		backgroundImages
+	} from '$lib/store/store.svelte';
 	import Bar from '../components/bar.svelte';
 	import { onMount, type Component } from 'svelte';
 	import Desktop from '../components/Desktop.svelte';
@@ -34,14 +39,11 @@
 		Contact: Contact
 	};
 	let App = $derived(appComponents[currentApp.value]);
-
-	function removeBgClasses(element: HTMLElement) {
-		for (const cls of Array.from(element.classList)) {
-			if (cls.startsWith('bg-image')) {
-				element.classList.remove(cls);
-			}
-		}
-	}
+	let bgStyle = $derived(
+		`background-image: url(${
+			backgroundImages.value.find((b) => b.name.startsWith(currentBackgroundImage.value))?.src
+		})`
+	);
 
 	onMount(() => {
 		const storedTheme = localStorage.getItem('Theme');
@@ -64,44 +66,15 @@
 				?.replace(/\.(jpg|png|webp)$/, '');
 
 			if (localBackground) {
-				const backgroundImageElement = document.getElementById(
-					'background-image'
-				) as HTMLDivElement;
-				if (backgroundImageElement) {
-					removeBgClasses(backgroundImageElement);
-					currentBackgroundImage.value = localBackground;
-				}
+				currentBackgroundImage.value = localBackground;
 			}
 		}
-		$effect(() => {
-			const backgroundImageElement = document.getElementById('background-image') as HTMLDivElement;
-			if (backgroundImageElement) {
-				removeBgClasses(backgroundImageElement);
-				switch (currentBackgroundImage.value) {
-					case 'background_image1':
-						backgroundImageElement.classList.add('bg-image1');
-						break;
-					case 'background_image2':
-						backgroundImageElement.classList.add('bg-image2');
-						break;
-					case 'background_image3':
-						backgroundImageElement.classList.add('bg-image3');
-						break;
-					case 'background_image4':
-						backgroundImageElement.classList.add('bg-image4');
-						break;
-					case 'background_image5':
-						backgroundImageElement.classList.add('bg-image5');
-						break;
-				}
-			}
-		});
 	});
 </script>
 
 <div class="main-content border-base-300 flex h-screen w-screen overflow-hidden">
 	<Bar />
-	<div class="background bg-image1 h-full w-full" id="background-image">
+	<div class="background h-full w-full" id="background-image" style={bgStyle}>
 		<div class="desktop mt-15">
 			<Desktop />
 		</div>
@@ -116,25 +89,8 @@
 	</div>
 </div>
 
-<div class="bg-image1 bg-image2 bg-image3 bg-image4 bg-image5 hidden"></div>
-
 <style>
 	.background {
 		background-size: cover;
-	}
-	.bg-image1 {
-		background-image: url('../assets/images/background_image1.webp');
-	}
-	.bg-image2 {
-		background-image: url('../assets/images/background_image2.webp');
-	}
-	.bg-image3 {
-		background-image: url('../assets/images/background_image3.webp');
-	}
-	.bg-image4 {
-		background-image: url('../assets/images/background_image4.webp');
-	}
-	.bg-image5 {
-		background-image: url('../assets/images/background_image5.webp');
 	}
 </style>
