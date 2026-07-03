@@ -63,26 +63,6 @@ Components only ever touch `theme.value` — no direct localStorage access.
 
 ---
 
-## 6. Replace imperative DOM classList with reactive CSS
-
-The background switching in `+layout.svelte` manually adds/removes `bg-image*` CSS classes on a DOM element. Replace with a reactive style binding:
-
-```svelte
-<script lang="ts">
-  let bgStyle = $derived(
-    `background-image: url(${
-      backgroundImages.value.find(b => b.name.startsWith(currentBackgroundImage.value))?.src
-    })`
-  );
-</script>
-
-<div class="background" style={bgStyle}>
-```
-
-Delete the 5 `bg-image*` CSS rules and the `removeBgClasses()` function.
-
----
-
 ## 7. Move all components to `src/lib/components/`
 
 SvelteKit convention places reusable components in `$lib/`. Move:
@@ -95,46 +75,6 @@ Optionally add an alias in `vite.config.ts`:
 resolve: {
   alias: { $components: path.resolve('./src/lib/components') }
 }
-```
-
----
-
-## 8. Extract SVG data from components into data files
-
-`skills.svelte` has ~400 lines of inline SVG strings. Move to `src/lib/data/skills.ts`:
-
-```typescript
-export interface Skill {
-  name: string;
-  value: number;
-  svg: string;
-}
-
-export const languages: Skill[] = [ /* ... */ ];
-export const frameworks: Skill[] = [ /* ... */ ];
-export const platforms: Skill[] = [ /* ... */ ];
-```
-
-Similarly, app icon SVGs in `store.svelte.ts` → `src/lib/data/apps.ts`.
-
----
-
-## 9. Fix the clock reactivity in bar.svelte
-
-`dayOrNight` is incorrectly set inside the interval callback instead of being reactive:
-
-```svelte
-// Before:
-let dayOrNight = $state('AM');
-onMount(() => {
-  setInterval(() => {
-    date = new Date();
-    dayOrNight = hour >= 12 ? 'PM' : 'AM';
-  }, 1000);
-});
-
-// After:
-let dayOrNight = $derived(date.getHours() >= 12 ? 'PM' : 'AM');
 ```
 
 ---
