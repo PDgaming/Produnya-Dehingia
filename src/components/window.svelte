@@ -20,7 +20,7 @@
 	.window {
 		height: 70%;
 		width: 60%;
-		top: 12%;
-		left: 23%;
+		top: 8%;
+		left: 21%;
 	}
 </style>

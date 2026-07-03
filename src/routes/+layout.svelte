@@ -80,7 +80,7 @@
 
 <div class="main-content border-base-300 flex h-screen w-screen flex-col overflow-hidden">
 	<div class="background h-full w-full" id="background-image" style={bgStyle}>
-		<div class="desktop mt-15">
+		<div class="desktop">
 			<Desktop />
 		</div>
 		{#if currentApp.value}
@@ -94,7 +94,6 @@
 			</div>
 		{/if}
 	</div>
-	<Bar />
 </div>
 
 <style>

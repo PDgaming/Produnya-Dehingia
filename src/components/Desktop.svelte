@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Navbar from '@components/navbar.svelte';
 	import { appsList, currentApp } from '$lib/store/store.svelte';
 </script>
 
@@ -6,7 +7,7 @@
 	<div class="apps flex flex-col gap-3">
 		{#each appsList.value as app (app.name)}
 			<button
-				class="app rounded-md"
+				class="app bg-base-100 rounded-md"
 				title={app.name}
 				onclick={() => {
 					currentApp.value = app.name;
@@ -18,17 +19,6 @@
 			</button>
 		{/each}
 	</div>
-</div>
 
-<style>
-	.desktop {
-		height: calc(100vh - 48px);
-	}
-	.app {
-		background-color: var(--base-300);
-		backdrop-filter: blur(200px);
-	}
-	.app:hover {
-		opacity: 0.5;
-	}
-</style>
+	<Navbar />
+</div>
